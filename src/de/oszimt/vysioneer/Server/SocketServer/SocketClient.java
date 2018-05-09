@@ -78,7 +78,7 @@ public class SocketClient extends Thread {
 							if(ServerMain.cm.GetClients().get(i).GetName().equalsIgnoreCase(name) && ServerMain.cm.GetClients().get(i).GetIP().equalsIgnoreCase(ip))
 								exist = true;
 						}
-						if(exist){
+						if(!exist){
 							ServerMain.cm.AddClient(new Client(name,ip));
 							ServerMain.smc.RefreshClientList();
 							out.writeObject((String)"Bye");
