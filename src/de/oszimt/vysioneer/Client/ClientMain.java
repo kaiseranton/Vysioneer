@@ -4,6 +4,7 @@ import java.net.InetAddress;
 import java.net.URL;
 
 import de.oszimt.vysioneer.Client.Config.ConfigManager;
+import de.oszimt.vysioneer.Client.Display.DisplayServer;
 import de.oszimt.vysioneer.Client.SocketClient.SocketClientManager;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -15,6 +16,9 @@ public class ClientMain extends Application {
     
 	public static ConfigManager cm;
 	public static String name;
+	
+	public static int SERVER_PORT = 12221;
+	public static int SERVER_VIDEO_PORT = 12222;
 	
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -42,6 +46,16 @@ public class ClientMain extends Application {
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
         
+        (new Thread() {
+        	  public void run() {
+        		  try {
+					new DisplayServer(80);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+        	  }
+        	 }).start();
      
     }
 

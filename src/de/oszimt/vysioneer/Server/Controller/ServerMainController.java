@@ -4,15 +4,17 @@ import java.net.InetAddress;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import de.oszimt.vysioneer.Client.ClientMain;
 import de.oszimt.vysioneer.Server.ServerMain;
-import javafx.application.Platform;
+import de.oszimt.vysioneer.Server.Client.Client;
+import de.oszimt.vysioneer.Server.Display.DisplayClient;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ListView;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.text.Text;
 
 public class ServerMainController implements Initializable {
@@ -37,6 +39,20 @@ public class ServerMainController implements Initializable {
 		}
 		TextServerAddress.setText(name);
 	}   
+	@FXML
+	private void ShowClient(final ActionEvent event){
+		if(ServerListe.getSelectionModel().getSelectedIndex() == -1){
+			Alert alert = new Alert(AlertType.WARNING);
+			alert.setTitle("Warnung!");
+			alert.setHeaderText("Bitte wähle zuerst einen Client aus!");
+			alert.showAndWait();
+			return;
+		}
+		Client c = ServerMain.cm.GetClients().get(ServerListe.getSelectionModel().getSelectedIndex());
+		new DisplayClient(c.GetIP());
+	}
+	
+	
 	public void SetPin(String pin){
 		TextServerPin.setText(pin);
 	}

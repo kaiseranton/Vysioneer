@@ -80,7 +80,7 @@ import javafx.util.Pair;
 		
 		ConfigServer server = ClientMain.cm.GetServerList().get(ServerListe.getSelectionModel().getSelectedIndex());
 		
-		SocketClientManager man = new SocketClientManager(server.GetIP(),8080);
+		SocketClientManager man = new SocketClientManager(server.GetIP(),ClientMain.SERVER_PORT);
 		while(!man.IsDone()){
 			try {Thread.sleep(10);} catch (Exception e) {} //fix freeze error
 		}
@@ -93,7 +93,7 @@ import javafx.util.Pair;
 			Optional<String> result = dialog.showAndWait();
 			if (result.isPresent()){
 				try {
-				    SocketClientManager authman = new SocketClientManager(server.GetIP(), 8080,Integer.parseInt(result.get()));
+				    SocketClientManager authman = new SocketClientManager(server.GetIP(), ClientMain.SERVER_PORT,Integer.parseInt(result.get()));
 				    while(!authman.IsDone()){
 				    	try {Thread.sleep(10);} catch (Exception e) {} //fix freeze error
 				    }

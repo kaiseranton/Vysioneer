@@ -19,6 +19,10 @@ public class ServerMain  extends Application {
 	public static SocketServerManager ssm;
 	public static ClientManager cm;
 	
+	public static int SERVER_PORT = 12221;
+	public static int SERVER_VIDEO_PORT = 12222;
+	
+	
     @Override
     public void start(Stage primaryStage) throws Exception {
     			
@@ -38,7 +42,7 @@ public class ServerMain  extends Application {
         pm = new PinManager();
        
         
-        ssm = new SocketServerManager(8080);
+        ssm = new SocketServerManager(this.SERVER_PORT);
         ssm.start();
         
         System.out.println("TESTEST");
